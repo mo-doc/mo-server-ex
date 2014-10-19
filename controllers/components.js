@@ -3,10 +3,10 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-var Article = mongoose.model('Article')
-var utils = require('../../lib/utils')
-var extend = require('util')._extend
+var mongoose = require('mongoose');
+var Component = mongoose.model('Component');
+
+
 
 /**
  * Load
@@ -65,23 +65,10 @@ exports.new = function (req, res){
  */
 
 exports.create = function (req, res) {
-  var article = new Article(req.body);
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
-
-  article.user = req.user;
-  article.uploadAndSave(images, function (err) {
-    if (!err) {
-      req.flash('success', 'Successfully created article!');
-      return res.redirect('/articles/'+article._id);
-    }
-    console.log(err);
-    res.render('articles/new', {
-      title: 'New Article',
-      article: article,
-      errors: utils.errors(err.errors || err)
-    });
+  var component = new Component(req.body);
+  component.save(function (err) {
+     if (err) return handleError(err);
+     res.json({code:200});
   });
 };
 

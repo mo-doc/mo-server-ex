@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+
+var components = require('../controllers/components');
 /* GET users listing. */
-router.post('/user', function(req, res) {
-  res.json({code:200})
-});
+router.post('/component',components.create);
 
 module.exports = router;

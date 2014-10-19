@@ -4,7 +4,7 @@
  */
 
 var mongoose = require('mongoose');
-var config = require('config');
+//var config = require('config');
 
 
 
@@ -35,7 +35,7 @@ var ComponentSchema = new Schema({
   intro: {type : String, default : '', trim : true},
   demo: {type : String, default : '', trim : true},
   codelink: {type : String, default : '', trim : true},
-  verify: {type : int, default : 1},
+  verify: {type : String, default : '1'},
   comments: [{
     body: { type : String, default : '' },
     user: { type : Schema.ObjectId, ref : 'User' },
@@ -49,8 +49,8 @@ var ComponentSchema = new Schema({
  * Validations
  */
 
-ComponentSchema.path('title').required(true, 'Article title cannot be blank');
-ComponentSchema.path('body').required(true, 'Article body cannot be blank');
+//ComponentSchema.path('title').required(true, 'Article title cannot be blank');
+//ComponentSchema.path('intro').required(true, 'Article body cannot be blank');
 
 /**
  * Pre-remove hook
@@ -81,24 +81,6 @@ ComponentSchema.methods = {
    * @param {Function} cb
    * @api private
    */
-
-  uploadAndSave: function (images, cb) {
-    if (!images || !images.length) return this.save(cb)
-
-    var imager = new Imager(imagerConfig, 'S3');
-    var self = this;
-
-    this.validate(function (err) {
-      if (err) return cb(err);
-      imager.upload(images, function (err, cdnUri, files) {
-        if (err) return cb(err);
-        if (files.length) {
-          self.image = { cdnUri : cdnUri, files : files };
-        }
-        self.save(cb);
-      }, 'article');
-    });
-  },
 
   /**
    * Add comment
