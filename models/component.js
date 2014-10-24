@@ -27,7 +27,7 @@ var setTags = function (tags) {
 };
 
 /**
- * Article Schema
+ * Component Schema
  */
 
 var ComponentSchema = new Schema({
@@ -42,6 +42,7 @@ var ComponentSchema = new Schema({
     createdAt: { type : Date, default : Date.now }
   }],
   keywords: {type: [], get: getTags, set: setTags},
+  classify:{type:String, default:'',trim:true},
   createdAt  : {type : Date, default : Date.now}
 });
 

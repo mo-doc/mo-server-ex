@@ -4,12 +4,14 @@
  */
 
 var mongoose = require('mongoose');
+var async = require('async');
+
 var Component = mongoose.model('Component');
 
 
 
 /**
- * Create an article
+ * Create an Component
  */
 
 exports.create = function (req, res) {
@@ -21,7 +23,7 @@ exports.create = function (req, res) {
 };
 
 /**
- * Remove an article
+ * Remove an Component
  */
 
 exports.remove = function (req, res) {
@@ -34,7 +36,7 @@ exports.remove = function (req, res) {
 
 
 /**
- * Find an article
+ * Find an Component
  */
 
 exports.findOne = function (req, res) {
@@ -45,7 +47,19 @@ exports.findOne = function (req, res) {
 };
 
 /**
- * Update an article
+ * Find Components
+ */
+
+exports.find = function (req, res) {
+  Component.find(req.body,function(err,doc){
+    if (err) return handleError(err);
+     res.json(doc);
+  });
+};
+
+
+/**
+ * Update an Component
  */
 exports.update=function(req,res){
    Component.update(req.body.select,req.body.update, { multi: true }, function (err, rows, raw) {
@@ -53,4 +67,24 @@ exports.update=function(req,res){
     res.json({rows:rows})
   });
 };
+
+
+/**
+ * List Components
+ */
+
+exports.listByClassify=function(req,res){
+  var tasks=[{classify:'util'},{classify:'base'},{classify:'server'}],
+      result=[];
+  async.eachSeries(tasks,function(item,callback){
+  	Component.find(item,function(err,doc){
+	 var obj={classify:item.classify,list:doc}
+	  result.push(obj);
+	  callback(err, doc);
+	});
+  },function(err){
+     if (err) return handleError(err);
+     res.json(result);
+  });
+}
 
