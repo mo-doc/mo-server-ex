@@ -48,6 +48,9 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 app.use('/', routes);
 app.use('/api', api);
+app.use('/test',function(req,res){
+res.json(req.body);
+})
 
 
 // catch 404 and forward to error handler
