@@ -1,7 +1,17 @@
-doctype html
-html
+doctype
+html(lang='en',ng-app='MOapp')
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title.
+      MO-doc
+    meta(charset='UTF-8')
+    script(src='http://localhost:9074/mod/neuron/latest/neuron.js')
+    script(type='text/javascript').
+      neuron.config({
+        path:"http://localhost:9074/mod"
+      });
+      window.ENV= "http://localhost:9074/mod/app-mo-static/latest/";
+
   body
     block content
+
+    
