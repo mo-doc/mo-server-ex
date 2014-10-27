@@ -31,8 +31,8 @@ var setTags = function (tags) {
  */
 
 var ComponentSchema = new Schema({
-  title: {type : String, default : '', trim : true},
-  intro: {type : String, default : '', trim : true},
+  title: {type : String, default : '', trim : true, required: true},
+  intro: {type : String, default : '', trim : true, required: true},
   demo: {type : String, default : '', trim : true},
   codelink: {type : String, default : '', trim : true},
   verify: {type : Number, default : 1},
@@ -41,17 +41,14 @@ var ComponentSchema = new Schema({
     user: { type : Schema.ObjectId, ref : 'User' },
     createdAt: { type : Date, default : Date.now }
   }],
-  keywords: {type: [], get: getTags, set: setTags},
-  classify:{type:String, default:'',trim:true},
+  keywords: {type: [], get: getTags, set: setTags, required: true},
+  classify:{type:String, default:'',trim:true, required: true},
   createdAt  : {type : Date, default : Date.now}
 });
 
 /**
  * Validations
  */
-
-//ComponentSchema.path('title').required(true, 'Article title cannot be blank');
-//ComponentSchema.path('intro').required(true, 'Article body cannot be blank');
 
 
 /**

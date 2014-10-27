@@ -17,7 +17,7 @@ var Component = mongoose.model('Component');
 exports.create = function (req, res) {
   var component = new Component(req.body);
   component.save(function (err) {
-     if (err) return handleError(err);
+     if (err) return res.json({code:500,msg:err.message});
      res.json({code:200});
   });
 };
@@ -28,7 +28,7 @@ exports.create = function (req, res) {
 
 exports.remove = function (req, res) {
    Component.remove(req.body, function (err) {
-    if (err) return handleError(err);
+    if (err) return res.json({code:500,msg:err.message});
      res.json({code:200});
   });
 
@@ -41,7 +41,7 @@ exports.remove = function (req, res) {
 
 exports.findOne = function (req, res) {
   Component.findOne(req.body,function(err,component){
-    if (err) return handleError(err);
+    if (err) return res.json({code:500,msg:err.message});
     res.json({component:component});
   });
 };
@@ -52,7 +52,7 @@ exports.findOne = function (req, res) {
 
 exports.find = function (req, res) {
   Component.find(req.body,function(err,doc){
-    if (err) return handleError(err);
+    if (err) return res.json({code:500,msg:err.message});
      res.json(doc);
   });
 };
@@ -63,7 +63,7 @@ exports.find = function (req, res) {
  */
 exports.update=function(req,res){
    Component.update(req.body.select,req.body.update, { multi: true }, function (err, rows, raw) {
-    if (err) return handleError(err);
+    if (err) return res.json({code:500,msg:err.message});
     res.json({rows:rows})
   });
 };
@@ -83,8 +83,28 @@ exports.listByClassify=function(req,res){
 	  callback(err, doc);
 	});
   },function(err){
-     if (err) return handleError(err);
+     if (err) return res.json({code:500,msg:err.message});
      res.json(result);
   });
 }
+
+/**
+ * Find Components
+ */
+
+exports.keywordFilter = function (req, res) {
+	var valReg=new RegExp(req.query.keyword,"i");
+  var tasks=[{title:valReg},{keyword:valReg}],
+      result=[];
+  async.eachSeries(tasks,function(item,callback){
+  	Component.find(item,function(err,doc){
+	  result=result.concat(doc);
+	  callback(err, doc);
+	});
+  },function(err){
+     if (err) return res.json({code:500,msg:err.message});
+     res.json(result);
+  });
+};
+
 
