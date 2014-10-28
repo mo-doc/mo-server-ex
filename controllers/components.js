@@ -12,6 +12,8 @@ var Component = mongoose.model('Component');
 
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
+
+
 /**
  * Create an Component
  */
@@ -56,7 +58,10 @@ exports.findOne = function (req, res) {
 exports.find = function (req, res) {
   Component.find(req.body,function(err,component){
     if (err) return res.json({code:500,msg:err.message});
-     component.intro=markdown.toHTML(decoder.write(component.intro));
+    component.forEach(function(com,idx){
+ 	 com.intro=markdown.toHTML(decoder.write(com.intro));
+    })
+    // component.intro=markdown.toHTML(decoder.write(component.intro));
      res.json(component);
   });
 };

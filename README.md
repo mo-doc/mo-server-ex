@@ -100,7 +100,7 @@ npm test OR  moncha
       msg:'errorreson'
 
 
-<a name=getComponentsByClassification" />
+<a name="getComponentsByClassification" />
 ##get components by classification
 
   GET:'api/component/listbyclassify'
@@ -123,7 +123,7 @@ npm test OR  moncha
   ]
 
 
-<a name=keywordFilter" />
+<a name="keywordFilter" />
 ##list components by keyword
 
   GET:'api/component/keywordfilter?keyword=****'
