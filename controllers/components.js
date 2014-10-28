@@ -54,9 +54,10 @@ exports.findOne = function (req, res) {
  */
 
 exports.find = function (req, res) {
-  Component.find(req.body,function(err,doc){
+  Component.find(req.body,function(err,component){
     if (err) return res.json({code:500,msg:err.message});
-     res.json(doc);
+     component.intro=markdown.toHTML(decoder.write(component.intro));
+     res.json(component);
   });
 };
 
