@@ -26,11 +26,13 @@ npm test OR  moncha
 * [`select components`](#selectComponents)
 * [`update a compoent`](#updateComponent)
 * [`list components by classification`](#getComponentsByClassification)
+* [`list components by keyword`](#keywordFilter)
+
 
 <a name="insertComponent" />
 ##insert component information
 
-  POST:"/component/add"
+  POST:"api/component/add"
   
   request:
   
@@ -58,7 +60,7 @@ npm test OR  moncha
 <a name="selectComponent" />
 ##select a component
 	
-  POST:"/component/findOne"
+  POST:"api/component/findOne"
 
   request:
 	any {key:value} that can specify a component
@@ -69,7 +71,7 @@ npm test OR  moncha
 <a name="selectComponents" />
 ##select components
 
-  POST:"/component/find"
+  POST:"api/component/find"
 
   request:
 	any {key:value} that can specify a group of components
@@ -81,7 +83,7 @@ npm test OR  moncha
 <a name="updateComponent" />
 ##update a component
 
-  POST:"/component/remove"
+  POST:"api/component/remove"
 
   request:
 	any {key:value} that can specify a component
@@ -101,7 +103,30 @@ npm test OR  moncha
 <a name=getComponentsByClassification" />
 ##get components by classification
 
-  GET:'/component/listbyclassify'
+  GET:'api/component/listbyclassify'
+
+  response:
+
+  [
+   {
+    classify: "util",
+    list: [ ]
+   },
+   {
+    classify: "base",
+    list: [ ]
+   },
+   {
+    classify: "server",
+    list: [ ]
+   }
+  ]
+
+
+<a name=keywordFilter" />
+##list components by keyword
+
+  GET:'api/component/keywordfilter?keyword=****'
 
   response:
 
