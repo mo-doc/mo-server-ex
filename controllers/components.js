@@ -103,7 +103,7 @@ exports.listByClassify=function(req,res){
 
 exports.keywordFilter = function (req, res) {
   var valReg=new RegExp(req.query.keyword,"i");
-  var tasks=[{title:valReg},{keyword:valReg}],
+  var tasks=[{title:valReg},{keywords:valReg}],
       result=[];
   async.eachSeries(tasks,function(item,callback){
   	Component.find(item,function(err,doc){
@@ -115,6 +115,22 @@ exports.keywordFilter = function (req, res) {
      result=unique(result);
      res.json(result);
   });
+};
+
+
+/**
+ *
+ */
+exports.addStar = function (req, res){
+  Component.findOne({title:req.query.title},function(err,doc){
+	if (err) return res.json({code:500,msg:err.message});
+	if (!doc) return res.json({code:500,msg:'no such component'});
+	var _star=doc.star+1;
+	Component.update(doc,{star:_star},function(err,rows){
+		if (err) return res.json({code:500,msg:err.message});
+    		res.json({code:200,star:_star});
+	})
+  })
 };
 
 

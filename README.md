@@ -27,6 +27,7 @@ npm test OR  moncha
 * [`update a compoent`](#updateComponent)
 * [`list components by classification`](#getComponentsByClassification)
 * [`list components by keyword`](#keywordFilter)
+* [`add a star to a component`](#addStar)
 
 
 <a name="insertComponent" />
@@ -126,7 +127,8 @@ npm test OR  moncha
 <a name="keywordFilter" />
 ##list components by keyword
 
-  GET:'api/component/keywordfilter?keyword=****'
+  GET:'api/component/keywordfilter?keyword=XXX'
+
 
   response:
 
@@ -144,3 +146,23 @@ npm test OR  moncha
     list: [ ]
    }
   ]
+
+<a name="addStar" />
+##add a star to a component
+
+  GET:'api/component/addstar?title=XXX'
+
+
+  response:
+	
+
+  if success
+
+      code:200,
+      star:int
+  
+  if error
+  
+      code:500,
+      msg:'errorreson'
+
