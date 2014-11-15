@@ -2,6 +2,8 @@ mo-server
 =========
 [![Build Status](https://travis-ci.org/mo-doc/mo-server-ex.svg?branch=master)](https://travis-ci.org/mo-doc/mo-server-ex)
 
+[TODOlist](todolist.md)
+
 #Get Started
 
 ##NodeJs config
