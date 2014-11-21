@@ -15,6 +15,8 @@ router.post('/component/find',components.find);
 /* GET request */
 router.get('/component/listbyclassify',components.listByClassify);
 router.get('/component/keywordfilter',components.keywordFilter);
+router.get('/component/addstar',components.addStar);
+
 
 /* TEST */
 router.post('/test',function(req,res){

@@ -42,6 +42,7 @@ var ComponentSchema = new Schema({
     createdAt: { type : Date, default : Date.now }
   }],
   keywords: {type: [], get: getTags, set: setTags, required: true},
+  star: {type : Number, default : 1},
   classify:{type:String, default:'',trim:true, required: true},
   createdAt  : {type : Date, default : Date.now}
 });
