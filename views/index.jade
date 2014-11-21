@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(ng-view)
+  div(ng-view,ng-show="!_loading")
   script(type='text/javascript').
     facade({
       mod:'app-mo-static'
