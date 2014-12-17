@@ -13,17 +13,34 @@ var Component = mongoose.model('Component');
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
 
-
+var Demo = require("../util/createDemo");
 /**
  * Create an Component
  */
 
 exports.create = function (req, res) {
-  var component = new Component(req.body);
-  component.save(function (err) {
-     if (err) return res.json({code:500,msg:err.message});
-     res.json({code:200});
-  });
+    var component = new Component(req.body);
+    component.save(function (err) {
+      if (err) {
+        return res.json({code:500,msg:err.message});
+      }
+       res.json({code:200});
+    });
+};
+
+exports.atuocreate = function (req, res) {
+  
+  new Demo(res,function(){
+      
+    // component.save(function (err) {
+    //   if (err) {
+    //       req.write(err.message);
+    //       req.end();
+    //   }
+    //     req.write("sucess");
+    //     req.end();
+    // });
+  })
 };
 
 /**
