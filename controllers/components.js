@@ -29,17 +29,17 @@ exports.create = function (req, res) {
 };
 
 exports.atuocreate = function (req, res) {
+    
   
-  new Demo(res,function(){
-      
-    // component.save(function (err) {
-    //   if (err) {
-    //       req.write(err.message);
-    //       req.end();
-    //   }
-    //     req.write("sucess");
-    //     req.end();
-    // });
+  new Demo(req,res,function(){
+    component.save(function (err) {
+      if (err) {
+          req.write(err.message);
+          req.end();
+      }
+        req.write("sucess");
+        req.end();
+    });
   })
 };
 
