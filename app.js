@@ -45,8 +45,10 @@ fs.readdirSync(__dirname + '/models').forEach(function (file) {
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
+// var demo = require("./routes/demo");
 app.use('/', routes);
 app.use('/api', api);
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/test',function(req,res){
 res.json(req.body);
 })
@@ -60,10 +62,7 @@ app.use(function(req, res, next) {
 });
 
 
-
-
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
