@@ -1,13 +1,37 @@
 var querystring = require('querystring');
 var _ =require("underscore");
 var fs = require("fs");
+var mkdirp = require("mkdirp");
+var sh = require("execSync");
+var cp =require("child_process");
 
-function _createDemo(attr){
-    fs.writeFileSync("yyy.html", "dsfasd", function(){
+function _createDemo(attr,res){
+    //建立代码库
+    mkdirp("demo/");
+    var ls = cp.exec("cd demo; "+
+       "rm -rvf "+attr.package['name']+"; "+
+       "git clone "+attr.package["code"]+"; "+
+       "cd "+ attr.package['name']+"; "+
+       "npm install; "+
+       "gulp; "+
+       "cortex install; "+
+       "cortex build --prerelease beta; "+
+       "exit 1;"
+    );
 
-    })
+   ls.stdout.on('data', function (data) {
+        console.info(data);
+    });
+
+    ls.stderr.on('data', function (data) {
+        console.info(data);
+    });
+
+    ls.on('exit', function (code) {
+        
+    });
+   
 }
-
 
 module.exports =  function(req,res,callback){
   var param = req.body;
@@ -18,26 +42,19 @@ module.exports =  function(req,res,callback){
   }catch(e){
       res.json({code:500,msg:"package文件出错"})
   }
-  ['name','version','keywords'].forEach(function(key){
+  ['name','version','keywords','code','classify'].forEach(function(key){
     if(!(key in _package)){
       res.json({code:500,msg:"package.json文件关键属性"+key+"缺失"});
     }
   });
 
-  if(!req.body.demo){
-    res.json({code:500,msg:"demo不存在"})
-  }
-
   if(!req.body.intro){
     res.json({code:500,msg:"文档不存在"})
   }
 
-
   _createDemo({
-    demo:param.demo,
-    intro:param.intro,
     package:_package
-  })
+  },res)
 
-  res.end();
+  return true;
 }

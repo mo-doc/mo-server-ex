@@ -14,13 +14,27 @@ var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
 
 var Demo = require("../util/createDemo");
+var _ =require("underscore");
 /**
  * Create an Component
  */
 
 exports.create = function (req, res) {
-    var component = new Component(req.body);
-    component.save(function (err) {
+    // 后端建立demo+校验数据完整
+    // new Demo(req,res);
+    
+    var _pkg = (req.body && (JSON.parse(req.body.package || "{}"))) || {};
+    
+    var component = new Component(
+    {
+      name:_pkg.name,
+      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(",") : _pkg.keywords.toString(),
+      intro:req.body.intro,
+      classify:_pkg.classify    
+    }
+  );
+
+  component.save(function (err) {
       if (err) {
         return res.json({code:500,msg:err.message});
       }
@@ -29,18 +43,29 @@ exports.create = function (req, res) {
 };
 
 exports.atuocreate = function (req, res) {
-    
   
-  new Demo(req,res,function(){
-    component.save(function (err) {
+  // 后端建立demo+校验数据完整
+  new Demo(req,res);
+
+  var _pkg = (req.body && (JSON.parse(req.body.package || "{}"))) || {};
+
+
+  var component = new Component(
+    {
+      name:_pkg.name,
+      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(",") : _pkg.keywords.toString(),
+      intro:req.body.intro,
+      classify:_pkg.classify    
+    }
+  );
+
+  component.save(function (err) {
       if (err) {
-          req.write(err.message);
-          req.end();
+        return res.json({code:500,msg:err.message});
       }
-        req.write("sucess");
-        req.end();
+       res.json({code:200});
     });
-  })
+
 };
 
 /**
