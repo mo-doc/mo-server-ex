@@ -33,7 +33,7 @@ var setTags = function (tags) {
 var ComponentSchema = new Schema({
   name: {type : String, trim : true, required: true,index:{unique: true}},
   intro: {type : String, default : '', trim : true, required: true},
-  version: {type : String, default : '', trim : true},
+  versions: {type : String, default : '', trim : true},
   codelink: {type : String, default : '', trim : true},
   verify: {type : Number, default : 1},
   comments: [{

@@ -49,7 +49,6 @@ exports.atuocreate = function (req, res) {
 
   var _pkg = (req.body && (JSON.parse(req.body.package || "{}"))) || {};
 
-
   var component = new Component(
     {
       name:_pkg.name,
@@ -59,12 +58,24 @@ exports.atuocreate = function (req, res) {
     }
   );
 
-  component.save(function (err) {
+
+
+  Component.remove({"name":_pkg.name}, function (err) {
+    if (err) {
+       console.log("删除久记录失败");
+    }
+    console.log("删除久记录成功");
+    component.save(function (err) {
       if (err) {
+        console.log(err.message);
         return res.json({code:500,msg:err.message});
       }
+      console.log("添加成功");
        res.json({code:200});
     });
+  });
+
+ 
 
 };
 
@@ -73,7 +84,7 @@ exports.atuocreate = function (req, res) {
  */
 
 exports.remove = function (req, res) {
-   Component.remove(req.body, function (err) {
+  Component.remove(req.body, function (err) {
     if (err) return res.json({code:500,msg:err.message});
      res.json({code:200});
   });
