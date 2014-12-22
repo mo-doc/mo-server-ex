@@ -24,7 +24,7 @@ exports.create = function (req, res) {
     // new Demo(req,res);
     
     var _pkg = (req.body && (JSON.parse(req.body.package || "{}"))) || {};
-    
+
     var component = new Component(
     {
       name:_pkg.name,
@@ -145,7 +145,7 @@ exports.listByClassify=function(req,res){
 
 exports.keywordFilter = function (req, res) {
   var valReg=new RegExp(req.query.keyword,"i");
-  var tasks=[{title:valReg},{keywords:valReg}],
+  var tasks=[{name:valReg},{keywords:valReg}],
       result=[];
   async.eachSeries(tasks,function(item,callback){
   	Component.find(item,function(err,doc){
