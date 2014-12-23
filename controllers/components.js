@@ -21,7 +21,7 @@ var _ =require("underscore");
 
 exports.create = function (req, res) {
     // 后端建立demo+校验数据完整
-    // new Demo(req,res);
+    new Demo(req,res);
     
     var _pkg = (req.body && (JSON.parse(req.body.package || "{}"))) || {};
 
