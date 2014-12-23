@@ -4,13 +4,13 @@ html(lang='en',ng-app='MOapp')
     title.
       MO-doc
     meta(charset='UTF-8')
-    script(src='http://localhost/ba/mo-doc/mo-static/neurons/neuron.js')
-    script(src='http://localhost/ba/mo-doc/mo-static/neurons/config.js')
+    script(src='http://http://192.168.7.94:1111/neurons/neuron.js')
+    script(src='http://192.168.7.94:1111/neurons/config.js')
     script(type='text/javascript').
       neuron.config({
-        path:"http://localhost/ba/mo-doc/mo-static/neurons/"
+        path:"http://192.168.7.94:1111/neurons/"
       });
-      window.ENV= "http://localhost/ba/mo-doc/mo-static/neurons/app-mo-static/0.1.0/";
+      window.ENV= "http://192.168.7.94:1111/neurons/app-mo-static/0.1.0/";
 
   body
     block content
