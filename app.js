@@ -48,7 +48,7 @@ var api = require('./routes/api');
 // var demo = require("./routes/demo");
 app.use('/', routes);
 app.use('/api', api);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'demo/')));
 app.use('/test',function(req,res){
 res.json(req.body);
 })
