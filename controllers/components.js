@@ -28,7 +28,7 @@ exports.create = function (req, res) {
     var component = new Component(
     {
       name:_pkg.name,
-      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(",") : _pkg.keywords.toString(),
+      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(" ") : _pkg.keywords.toString(),
       intro:req.body.intro,
       classify:_pkg.classify    
     }
@@ -52,7 +52,7 @@ exports.atuocreate = function (req, res) {
   var component = new Component(
     {
       name:_pkg.name,
-      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(",") : _pkg.keywords.toString(),
+      keywords:_.isArray(_pkg.keywords) ? _pkg.keywords.join(" ") : _pkg.keywords.toString(),
       intro:req.body.intro,
       classify:_pkg.classify    
     }
