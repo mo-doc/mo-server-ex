@@ -15,7 +15,7 @@ function _createDemo(attr,res){
        "npm install; "+
        "gulp; "+
        "cortex install; "+
-       "cortex build --prerelease beta; "+
+       "cortex build; "+
        "exit 1;"
     );
 
