@@ -34,15 +34,7 @@ var ComponentSchema = new Schema({
   name: {type : String, trim : true, required: true,index:{unique: true}},
   intro: {type : String, default : '', trim : true, required: true},
   versions: {type : String, default : '', trim : true},
-  codelink: {type : String, default : '', trim : true},
-  verify: {type : Number, default : 1},
-  comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
   keywords: {type: [], get: getTags, set: setTags, required: true},
-  star: {type : Number, default : 1},
   classify:{type:String, default:'',trim:true, required: true},
   createdAt  : {type : Date, default : Date.now}
 });

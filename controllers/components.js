@@ -136,7 +136,7 @@ exports.update=function(req,res){
  */
 
 exports.listByClassify=function(req,res){
-  var tasks=[{classify:'util'},{classify:'base'},{classify:'server'}],
+  var tasks=[{classify:'util'},{classify:'base'},{classify:'efte'}],
       result=[];
   async.eachSeries(tasks,function(item,callback){
   	Component.find(item,function(err,doc){
