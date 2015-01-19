@@ -62,9 +62,9 @@ exports.atuocreate = function (req, res) {
 
   Component.remove({"name":_pkg.name}, function (err) {
     if (err) {
-       console.log("删除久记录失败");
+       console.log("删除旧记录失败");
     }
-    console.log("删除久记录成功");
+    console.log("删除旧记录成功");
     component.save(function (err) {
       if (err) {
         console.log(err.message);
