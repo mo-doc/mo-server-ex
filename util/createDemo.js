@@ -10,7 +10,7 @@ function _createDemo(attr,res){
     mkdirp("demo/");
     var ls = cp.exec("cd demo; "+
        "rm -rvf "+attr.package['name']+"; "+
-       "git clone "+attr.package["code"]+"; "+
+       "git clone "+attr.package["repository"]+"; "+
        "cd "+ attr.package['name']+"; "+
        "npm install; "+
        "gulp; "+
@@ -43,7 +43,7 @@ module.exports =  function(req,res,callback){
   }catch(e){
       res.json({code:500,msg:"package文件出错"})
   }
-  ['name','version','keywords','code','classify'].forEach(function(key){
+  ['name','version','keywords','repository','classify'].forEach(function(key){
     if(!(key in _package)){
       res.json({code:500,msg:"package.json文件关键属性"+key+"缺失"});
     }
